@@ -26,7 +26,7 @@ module Net.OAuth.OAuth10a
     , signing_key
     , sign
     , create_header_string
-    , request_token_params
+    , oauth_sig
     ) where
 
 import Network.HTTP.Client
@@ -143,15 +143,15 @@ create_header_string params = build $ (bs "OAuth") <> str where
     comma'd = intersperse (bs ", ") stringified
     str = foldl (<>) mempty comma'd
 
--- | Used for generating a token request
-request_token_params
+-- | Generates the signature for a given request, not the full header
+oauth_sig
     :: MonadIO m
     => Credentials
     -> ByteString -- ^ method
     -> ByteString -- ^ url
     -> [Param]    -- ^ any extra parameters
-    -> m [Param]
-request_token_params creds method url extras = do
+    -> m ByteString
+oauth_sig creds method url extras = do
     nonce <- gen_nonce
     ts <- timestamp >>= return . pack . show
     let params = [ Param "oauth_consumer_key" (consumerKey creds)
@@ -164,7 +164,7 @@ request_token_params creds method url extras = do
     let params' = param_string $ extras ++ params
     let base_string = sig_base_string params' method url
     let signature = sign sk base_string
-    return $ (Param "oauth_signature" signature) : (params ++ extras)
+    return signature
 
 auth_header
     :: MonadIO m
