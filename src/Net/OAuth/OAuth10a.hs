@@ -17,6 +17,7 @@ module Net.OAuth.OAuth10a
     ( auth_header
     , param_string
     , Param(..)
+    , Credentials(..)
     , PercentEncode(..)
     , filterNonAlphanumeric
     , gen_nonce
@@ -50,6 +51,14 @@ data Param = Param
     { paramKey   :: ByteString
     , paramValue :: ByteString
     } deriving (Show, Eq, Ord)
+
+-- | Request credentials
+data Credentials = Credentials
+    { consumerKey :: ByteString
+    , consumerSecret :: ByteString
+    , token :: Maybe ByteString
+    , tokenSecret :: Maybe ByteString
+    } deriving (Show)
 
 -- * Helpers
 bs = BB.byteString
@@ -135,15 +144,12 @@ create_header_string params = build $ (bs "OAuth") <> str where
 
 auth_header
     :: MonadIO m
-    => ByteString -- ^ Consumer key
-    -> ByteString -- ^ Consumer secret
-    -> Maybe ByteString -- ^ Access token (maybe)
-    -> Maybe ByteString -- ^ Access secret (maybe)
+    => Credentials
     -> ByteString -- ^ method
     -> ByteString -- ^ url
     -> [Param]    -- ^ Any extra parameters
     -> m ByteString
-auth_header key secret token token_secret method url extras = do
+auth_header (Credentials key secret token token_secret) method url extras = do
     nonce <- gen_nonce
     ts    <- timestamp >>= return . pack . show
     let params = [ Param "oauth_consumer_key" key
