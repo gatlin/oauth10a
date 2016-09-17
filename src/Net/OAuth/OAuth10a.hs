@@ -150,7 +150,7 @@ oauth_sig
     -> ByteString -- ^ method
     -> ByteString -- ^ url
     -> [Param]    -- ^ any extra parameters
-    -> m ByteString
+    -> m [Param]
 oauth_sig creds method url extras = do
     nonce <- gen_nonce
     ts <- timestamp >>= return . pack . show
@@ -164,7 +164,7 @@ oauth_sig creds method url extras = do
     let params' = param_string $ extras ++ params
     let base_string = sig_base_string params' method url
     let signature = sign sk base_string
-    return signature
+    return $ (Param "oauth_signature" signature) : (params ++ extras)
 
 auth_header
     :: MonadIO m
