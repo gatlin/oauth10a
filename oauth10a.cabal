@@ -1,13 +1,20 @@
 name:                oauth10a
 version:             0.1.0.0
-synopsis:            Initial project template from stack
-description:         Please see README.md
-homepage:            https://github.com/githubuser/oauth10a#readme
-license:             BSD3
+synopsis:            Simple utilities to create OAuth 1.0a headers
+description:
+    Provides simple functions and types for generating OAuth 1.0a headers as
+    simply and straightforwardly as possible. If you have credentials, a request
+    method, a url, and extra parameters, you'll get back a compliant
+    'ByteString' to put in your @Authorization@ header.
+
+    See the README.md for more details!
+
+homepage:            https://github.com/gatlin/oauth10a#readme
+license:             GPL-3
 license-file:        LICENSE
-author:              Author name here
-maintainer:          example@example.com
-copyright:           2016 Author name here
+author:              Gatlin Johnson
+maintainer:          gatlin@niltag.net
+copyright:           2016 Gatlin Johnson
 category:            Web
 build-type:          Simple
 -- extra-source-files:
@@ -24,9 +31,7 @@ library
                        time,
                        transformers,
                        cryptohash,
-                       http-types,
-                       http-client,
-                       http-client-tls
+                       http-types
   default-language:    Haskell2010
 
 test-suite oauth10a-test

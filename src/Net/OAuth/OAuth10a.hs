@@ -29,7 +29,6 @@ module Net.OAuth.OAuth10a
     , oauth_sig
     ) where
 
-import Network.HTTP.Client
 import Network.HTTP.Types.Status (statusCode)
 import Data.ByteString (ByteString)
 import qualified Data.ByteString.Lazy as BL
@@ -38,7 +37,7 @@ import qualified Data.ByteString.Base64 as B64
 import Data.ByteString.Char8 (pack, unpack)
 import Data.ByteString.Builder (Builder)
 import qualified Data.ByteString.Builder as BB
-import Control.Monad.IO.Class
+import Control.Monad.IO.Class (MonadIO, liftIO)
 import Control.Monad (forM, mapM)
 import System.Entropy (getEntropy)
 import Data.Time.Clock.POSIX (getPOSIXTime)
