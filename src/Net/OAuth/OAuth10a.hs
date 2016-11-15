@@ -135,7 +135,7 @@ sign key msg = B64.encode $ hmac hash 64 key msg
 
 -- | Generate the Authorization header given a list of 'Param'
 create_header_string :: [Param] -> ByteString
-create_header_string params = build $ (bs "OAuth") <> str where
+create_header_string params = build $ (bs "OAuth  ") <> str where
     q = bs $ pack ['"']
     encoded = sort $ map percent_encode params
     stringified = map (\(Param k v) -> (bs k) <> (bs "=") <> q <> (bs v) <> q)
