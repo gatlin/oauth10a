@@ -74,8 +74,7 @@ Starter kit
 ---
 
 The following is example client code using this package which defines a monad
-DSL.
-
+DSL, with primitive API operations as the basic commands.
 
 ```haskell
 {-# LANGUAGE OverloadedStrings, GeneralizedNewtypeDeriving #-}
