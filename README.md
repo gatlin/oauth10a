@@ -161,6 +161,11 @@ apiGetRequest url params = do
 {- ... etc ... -}
 ```
 
+With the above, you could start to define commands for your API by generating
+the requests with `apiGetRequest` and using the functions over in
+`http-client`. The cool part is that your `GET` requests will automatically (and
+luxuriously) have the correct OAuth 1.0a headers put in place.
+
 License
 ---
 
