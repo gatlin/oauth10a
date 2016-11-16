@@ -15,6 +15,9 @@ package is to be simple, correct, and fast.
 The generated documentation on Haskell is more thorough but here is a whirlwind
 tour of the package.
 
+You may want to peruse the section "Starter kit" below or the `tests/Spec.hs`
+file for example usage.
+
 ### Credentials and parameters
 
 Two types are exported: `Credentials` and `Param`. Their definitions are
