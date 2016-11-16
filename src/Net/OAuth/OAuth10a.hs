@@ -166,6 +166,8 @@ oauth_sig creds method url extras = do
     let signature = sign sk base_string
     return $ (Param "oauth_signature" signature) : (params ++ extras)
 
+-- | From start to finish creates the OAuth 1.0a header string
+-- (what you would put as the value for the 'Authorization' header)
 auth_header
     :: MonadIO m
     => Credentials
