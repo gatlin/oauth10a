@@ -12,7 +12,7 @@ Generating OAuth 1.0a headers can be a bit tricky. This package provides
 convenience types and functions to make the process less tricky. The aim of this
 package is to be simple, correct, and fast.
 
-The generated documentation on Haskell is more thorough but here is a whirlwind
+The generated documentation on Hackage is more thorough but here is a whirlwind
 tour of the package.
 
 You may want to peruse the section "Starter kit" below or the `tests/Spec.hs`
