@@ -156,7 +156,7 @@ oauth_sig creds method url extras = do
     let params = [ Param "oauth_consumer_key" (consumerKey creds)
                  , Param "oauth_nonce" nonce
                  , Param "oauth_timestamp" ts
-                 , Param "oauth_token" (maybe "" id token)
+                 , Param "oauth_token" (maybe "" id (token creds))
                  , Param "oauth_signature_method" "HMAC-SHA1"
                  , Param "oauth_version" "1.0"
                  ]
